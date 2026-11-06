@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://m7igh4attb1"]
+
+[ext_resource type="PackedScene" uid="uid://dxho1h5kuf7kf" path="res://scenes/scene_elements/player.tscn" id="1_egl6x"]
+[ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://scenes/scene_elements/planet.tscn" id="2_og1mu"]
+
+[node name="TestArena" type="Node2D" unique_id=109389340]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=778244290]
+
+[node name="Node" type="Node" parent="." unique_id=1667924499]
+
+[node name="Planet1" parent="Node" unique_id=146977182 instance=ExtResource("2_og1mu")]
+position = Vector2(474, -249)
+mass = 10.0
+
+[node name="Planet2" parent="Node" unique_id=851073145 instance=ExtResource("2_og1mu")]
+position = Vector2(224, 286)
+
+[node name="Player" parent="." unique_id=1358009626 instance=ExtResource("1_egl6x")]
+position = Vector2(-368, -171)
