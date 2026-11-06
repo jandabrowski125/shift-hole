@@ -17,11 +17,12 @@ mass = 100.0
 script = ExtResource("1_dvmro")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
-modulate = Color(5.7219377, 0, 0, 1)
+modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("1_pok6h")
 
 [node name="CollisionTrigger" type="Area2D" parent="." unique_id=80762426]
+visible = false
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
@@ -45,6 +46,7 @@ shape = SubResource("CircleShape2D_2ybf6")
 debug_color = Color(0.015592533, 0.014397634, 0.017621012, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=380145062]
+visible = false
 shape = SubResource("CircleShape2D_88rhy")
 
 [connection signal="body_entered" from="CollisionTrigger" to="." method="_on_collision_trigger_body_entered"]
