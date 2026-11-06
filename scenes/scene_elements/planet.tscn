@@ -6,6 +6,8 @@
 radius = 22.203604
 
 [node name="Planet" type="RigidBody2D" unique_id=851073145]
+collision_layer = 2
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
 scale = Vector2(0.03, 0.03)
