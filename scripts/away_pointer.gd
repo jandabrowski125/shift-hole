@@ -35,16 +35,16 @@ func _process(delta):
 		update_distance_label(intersection)
 		return
 	hide_pointer()
-#
+
 func is_target_outside_viewport() -> bool:
 	return not viewport.has_point(target.global_position)
-#
+
 func show_pointer():
 	visible = true
-#
+
 func hide_pointer():
 	visible = false
-#
+
 func update_pointer_position() -> Vector2:
 	t_pos = target.global_position
 	target_angle = (target.position-v_c).angle()
@@ -75,8 +75,9 @@ func update_pointer_position() -> Vector2:
 		)
 	self.global_position = pointer_pos.clamp(Vector2(offset,offset), viewport.size - Vector2(offset,offset))
 	return pointer_pos
+
 func update_pointer_rotation():
-	self.rotate(get_angle_to(target.global_position) - PI)
+	$Sprite2D.rotation = get_angle_to(target.global_position) - PI
 	
 func update_distance_label(intersection: Vector2):
 	distance = intersection.distance_to(target.global_position)
