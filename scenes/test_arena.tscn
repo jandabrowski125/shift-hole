@@ -1,25 +1,30 @@
 [gd_scene format=3 uid="uid://m7igh4attb1"]
 
 [ext_resource type="PackedScene" uid="uid://dxho1h5kuf7kf" path="res://scenes/scene_elements/player.tscn" id="1_egl6x"]
+[ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://scenes/scene_elements/away_pointer.tscn" id="3_s42hq"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://scenes/scene_elements/static_celestial.tscn" id="3_xjnh2"]
 
 [node name="TestArena" type="Node2D" unique_id=109389340]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=778244290]
-zoom = Vector2(0.49, 0.49)
+position = Vector2(960, 540)
 
 [node name="Planets" type="Node" parent="." unique_id=1667924499]
 
 [node name="Player" parent="." unique_id=1358009626 instance=ExtResource("1_egl6x")]
-position = Vector2(-368, -171)
+position = Vector2(57, 205)
 startVelocityX = 200.0
 startVelocityY = -40.0
 
 [node name="StaticCelestial" parent="." unique_id=1448866130 instance=ExtResource("3_xjnh2")]
-position = Vector2(332, -230)
+position = Vector2(1703.9999, 863.9999)
 
 [node name="StaticCelestial2" parent="." unique_id=1278778477 instance=ExtResource("3_xjnh2")]
-position = Vector2(486, 129)
+position = Vector2(1124.0002, 619)
 
 [node name="StaticCelestial3" parent="." unique_id=874741662 instance=ExtResource("3_xjnh2")]
-position = Vector2(-284, 230)
+position = Vector2(51.000046, 353)
+
+[node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("3_s42hq")]
+position = Vector2(2386, 195)
+target = NodePath("../Player")

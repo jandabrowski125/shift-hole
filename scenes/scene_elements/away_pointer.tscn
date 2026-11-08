@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c317eworr75ky"]
+
+[ext_resource type="Script" uid="uid://tmwciylxo21x" path="res://scripts/away_pointer.gd" id="1_jfx33"]
+[ext_resource type="Texture2D" uid="uid://dyf6mhmpxjgn" path="res://textures/arrow.png" id="1_p4kkg"]
+
+[node name="AwayPointer" type="Node2D" unique_id=1176296153]
+script = ExtResource("1_jfx33")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749545834]
+position = Vector2(-2.3999994, -9.399999)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_p4kkg")
+
+[node name="Label" type="Label" parent="." unique_id=2141977269]
+modulate = Color(0.49099982, 1.0949746e-06, 3.3691526e-07, 1)
+offset_left = -20.4
+offset_top = 11.6
+offset_right = 19.6
+offset_bottom = 34.6
+text = "1000"
+metadata/_edit_use_anchors_ = true
