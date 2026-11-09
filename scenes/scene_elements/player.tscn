@@ -18,7 +18,7 @@ script = ExtResource("1_dvmro")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
 modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.025, 0.025)
 texture = ExtResource("1_pok6h")
 
 [node name="CollisionTrigger" type="Area2D" parent="." unique_id=80762426]
