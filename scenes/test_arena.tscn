@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://m7igh4attb1"]
 
 [ext_resource type="PackedScene" uid="uid://dxho1h5kuf7kf" path="res://scenes/scene_elements/player.tscn" id="1_egl6x"]
-[ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://scenes/scene_elements/away_pointer.tscn" id="3_s42hq"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://scenes/scene_elements/static_celestial.tscn" id="3_xjnh2"]
 
 [node name="TestArena" type="Node2D" unique_id=109389340]
