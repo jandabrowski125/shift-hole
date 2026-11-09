@@ -2,3 +2,4 @@
 .godot/
 /android/
 godot-git-plugin-v3.3.0/
+/scenes/test_arena.tscn
