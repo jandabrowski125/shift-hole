@@ -79,6 +79,6 @@ func update_pointer_position() -> Vector2:
 func update_pointer_rotation():
 	$Sprite2D.rotation = get_angle_to(target.global_position) - PI
 	
-func update_distance_label(intersection: Vector2):
-	distance = intersection.distance_to(target.global_position)
+func update_distance_label(from: Vector2):
+	distance = from.distance_to(target.global_position)
 	$Label.text = str(int(distance))
