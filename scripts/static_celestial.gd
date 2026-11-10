@@ -1,16 +1,19 @@
 extends StaticBody2D
 
+signal danger_proximity(data: Array)
+signal safe_distance(position: Vector2)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var radius: float = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+func _ready():
+	radius = (($CollisionTrigger.get_node("CollisionShape2D") as CollisionShape2D).shape as CircleShape2D).radius * scale.x
 
 func _on_collision_trigger_body_entered(body: Node2D) -> void:
-		body.queue_free()
-		print("You lost the game. Try again.")
+	if body.is_in_group("players"):
+		SignalBus.emit("danger_proximity", [global_position, radius])
+		print(radius)
+	#body.queue_free()
+
+func _on_collision_trigger_body_exited(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		SignalBus.emit("safe_distance", global_position)

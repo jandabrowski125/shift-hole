@@ -4,15 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="1_pok6h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
-radius = 56.0
+radius = 19.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ybf6"]
 radius = 881.0959
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_88rhy"]
-radius = 57.07889
+radius = 19.026299
 
-[node name="Player" type="RigidBody2D" unique_id=851073145]
+[node name="Player" type="RigidBody2D" unique_id=851073145 groups=["players"]]
 mass = 100.0
 script = ExtResource("1_dvmro")
 
@@ -22,7 +22,6 @@ scale = Vector2(0.025, 0.025)
 texture = ExtResource("1_pok6h")
 
 [node name="CollisionTrigger" type="Area2D" parent="." unique_id=80762426]
-visible = false
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
@@ -32,7 +31,6 @@ shape = SubResource("CircleShape2D_cfwyv")
 debug_color = Color(0, 0.008664037, 0.0122821415, 0.41960785)
 
 [node name="GravityArea2D" type="Area2D" parent="." unique_id=824226226]
-visible = false
 collision_layer = 2
 collision_mask = 2
 gravity_space_override = 1
@@ -43,10 +41,9 @@ gravity_direction = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea2D" unique_id=773216362]
 shape = SubResource("CircleShape2D_2ybf6")
-debug_color = Color(0.015592533, 0.014397634, 0.017621012, 0.41960785)
+debug_color = Color(0.22352941, 0, 0.9882353, 0.09019608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=380145062]
-visible = false
 shape = SubResource("CircleShape2D_88rhy")
 
 [connection signal="body_entered" from="CollisionTrigger" to="." method="_on_collision_trigger_body_entered"]
