@@ -46,7 +46,6 @@ func _on_collision_trigger_body_entered(body: Node2D) -> void:
 
 func _shift_color(delta: float):
 	currSwitchTime += delta
-	print(currSwitchTime)
 	if currSwitchTime >= switchDuration:
 		#switch zakonczony
 		#upewniam sie ze jestem w kolorze ktory chce:

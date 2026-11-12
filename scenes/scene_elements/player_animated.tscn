@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bg1kfwwdv5yhv"]
+
+[ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://scripts/player.gd" id="1_ui2hb"]
+[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="2_kvxsh"]
+[ext_resource type="Script" uid="uid://qvmaiyg30imj" path="res://scripts/spaghetti_particles.gd" id="3_kvxsh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
+radius = 19.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ybf6"]
+radius = 881.0959
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88rhy"]
+radius = 19.026299
+
+[node name="Player" type="RigidBody2D" unique_id=851073145 groups=["players"]]
+mass = 100.0
+script = ExtResource("1_ui2hb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
+modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_kvxsh")
+
+[node name="CollisionTrigger" type="Area2D" parent="." unique_id=80762426]
+collision_layer = 10
+collision_mask = 2
+input_pickable = false
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionTrigger" unique_id=117535692]
+shape = SubResource("CircleShape2D_cfwyv")
+debug_color = Color(0, 0.008664037, 0.0122821415, 0.41960785)
+
+[node name="GravityArea2D" type="Area2D" parent="." unique_id=824226226]
+collision_layer = 2
+collision_mask = 2
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea2D" unique_id=773216362]
+shape = SubResource("CircleShape2D_2ybf6")
+debug_color = Color(0.22352941, 0, 0.9882353, 0.09019608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=380145062]
+shape = SubResource("CircleShape2D_88rhy")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=745520326]
+emitting = false
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 19.22
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+script = ExtResource("3_kvxsh")
+
+[connection signal="body_entered" from="CollisionTrigger" to="." method="_on_collision_trigger_body_entered"]

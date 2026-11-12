@@ -1,8 +1,5 @@
 extends StaticBody2D
 
-signal danger_proximity(data: Array)
-signal safe_distance(position: Vector2)
-
 var radius: float = 0
 
 func _ready():
