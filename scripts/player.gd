@@ -44,25 +44,42 @@ func _on_collision_trigger_body_entered(body: Node2D) -> void:
 		print("Player mass increased by ", body.mass)
 		body.queue_free()
 
-func _shift_color(delta: float):
-	currSwitchTime += delta
-	print(currSwitchTime)
-	if currSwitchTime >= switchDuration:
-		#switch zakonczony
-		#upewniam sie ze jestem w kolorze ktory chce:
-		var c = int(!isBlack) * maxColorIntensity
-		$Sprite2D.modulate = Color(c,c,c)
-		currSwitchTime = 0
-		isSwitching = false
-		return
-	var newIntensity = $Sprite2D.modulate.r + (1 - 2*int(isBlack)) * colorSwitchStep*delta
-	$Sprite2D.modulate = Color(newIntensity,newIntensity,newIntensity)
+#func _shift_color(delta: float):
+	#currSwitchTime += delta
+	#if currSwitchTime >= switchDuration:
+		#print(currSwitchTime)
+		##switch zakonczony
+		##upewniam sie ze jestem w kolorze ktory chce:
+		#var c = int(!isBlack) * maxColorIntensity
+		#$Sprite2D.modulate = Color(c,c,c)
+		#currSwitchTime = 0
+		#isSwitching = false
+		#return
+	#var newIntensity = $Sprite2D.modulate.r + (1 - 2*int(isBlack)) * colorSwitchStep*delta
+	#$Sprite2D.modulate = Color(newIntensity,newIntensity,newIntensity)
 
 func _input(event):
-	if event.is_action_pressed("shift"):
-		print("Shifting started")
-		if !isSwitching:
-			isBlack = !isBlack
-			isSwitching = true
-			self.gravity_scale *= -1
-			$GravityArea2D.gravity *= -1
+	if event.is_action_pressed("shift") and not isSwitching:
+		isBlack = !isBlack
+		isSwitching = true
+		gravity_scale *= -1
+		$GravityArea2D.gravity *= -1
+
+		var base = $Sprite2D.scale
+		var c = 0.0 if isBlack else maxColorIntensity
+
+		var t = create_tween()
+		if isBlack:
+			# white -> black
+			t.tween_property($Sprite2D, "scale", Vector2.ZERO, switchDuration / 3)
+			t.tween_property($Sprite2D, "modulate", Color(c, c, c), switchDuration / 3)
+			t.tween_property($Sprite2D, "scale", base, switchDuration / 3) \
+				.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		else:
+			# black -> white
+			t.tween_property($Sprite2D, "scale", base * Vector2(1.3, 0.7), 0.08)
+			t.parallel().tween_property($Sprite2D, "modulate", Color(c, c, c), 0.08)
+			t.tween_property($Sprite2D, "scale", base, 0.4) \
+				.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+		t.finished.connect(func(): isSwitching = false)
