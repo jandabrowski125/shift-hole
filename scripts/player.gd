@@ -3,7 +3,7 @@ extends RigidBody2D
 const GRAVITY = 9.81
 var isBlack = true
 
-@export var switchDuration: float = 1:
+@export var switchDuration: float = 0.5:
 	set(value):
 		switchDuration = value
 		
@@ -29,8 +29,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if isSwitching: _shift_color(delta)
-		
+	pass	
 		
 
 
@@ -44,19 +43,6 @@ func _on_collision_trigger_body_entered(body: Node2D) -> void:
 		print("Player mass increased by ", body.mass)
 		body.queue_free()
 
-#func _shift_color(delta: float):
-	#currSwitchTime += delta
-	#if currSwitchTime >= switchDuration:
-		#print(currSwitchTime)
-		##switch zakonczony
-		##upewniam sie ze jestem w kolorze ktory chce:
-		#var c = int(!isBlack) * maxColorIntensity
-		#$Sprite2D.modulate = Color(c,c,c)
-		#currSwitchTime = 0
-		#isSwitching = false
-		#return
-	#var newIntensity = $Sprite2D.modulate.r + (1 - 2*int(isBlack)) * colorSwitchStep*delta
-	#$Sprite2D.modulate = Color(newIntensity,newIntensity,newIntensity)
 
 func _input(event):
 	if event.is_action_pressed("shift") and not isSwitching:
