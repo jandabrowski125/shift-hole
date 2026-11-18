@@ -1,5 +1,5 @@
 extends Node2D
-#
+
 @export var target: Node2D
 
 var offset: float = 40.0
@@ -25,7 +25,6 @@ func _ready():
 		viewport.size, #(size.x, size.y)
 		Vector2.DOWN * viewport.size #(0, vp.size.y)
 		]
-	pass
 
 func _process(delta):
 	if is_target_outside_viewport():
