@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://i8ucdg1y72yq"]
 
-[ext_resource type="Script" uid="uid://d21xd83eanwpk" path="res://scripts/static_celestial.gd" id="1_kf5nv"]
-[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="1_y1760"]
+[ext_resource type="Script" uid="uid://d21xd83eanwpk" path="res://src/gameplay/collidable/static_celestial.gd" id="1_kf5nv"]
+[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="1_y1760"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 1643.0195

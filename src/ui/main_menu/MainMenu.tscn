@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dnqr2s5re132t"]
+
+[ext_resource type="Script" uid="uid://b13kdu7goo8cy" path="res://src/ui/main_menu/main_menu.gd" id="1_m3ldw"]
+[ext_resource type="Texture2D" uid="uid://cuf7uvm37mghw" path="res://assets/sprites/placeholder.jpg" id="2_xre00"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t5jfb"]
+texture = ExtResource("2_xre00")
+modulate_color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="MainMenu" type="Control" unique_id=1064406176]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m3ldw")
+
+[node name="Panel" type="Panel" parent="." unique_id=1761512468]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_t5jfb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=338543504]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="StartGame" type="Button" parent="VBoxContainer" unique_id=1911030090]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start Game"
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1261195309]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Exit"
+
+[node name="Title" type="Label" parent="." unique_id=634478290]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "Holey Shift"
+
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
