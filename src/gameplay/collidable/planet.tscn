@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 22.203604
 
-[node name="Planet" type="RigidBody2D" unique_id=851073145]
+[node name="Planet" type="RigidBody2D" unique_id=851073145 groups=["planets"]]
 collision_layer = 2
 collision_mask = 3
 
@@ -13,5 +13,5 @@ collision_mask = 3
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("1_cktii")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=117535692]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1228483197]
 shape = SubResource("CircleShape2D_cfwyv")

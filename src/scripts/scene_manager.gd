@@ -3,6 +3,7 @@ extends Node
 const MAIN_MENU_PATH: NodePath = "res://src/ui/main_menu/MainMenu.tscn"
 const BEGINNING_CUTSCENE_PATH = "" # nalezy to wypelnic
 const LEVEL_PATHS_IN_ORDER: Array[NodePath] = [
+	"res://src/levels/test_arena/test_arena.tscn",
 	"res://src/levels/level1/level_1.tscn",
 ]
 const FINAL_CUTSCENE_PATH = "res://src/cutscenes/EndingCutscene.tscn" # nalezy to wypelnic

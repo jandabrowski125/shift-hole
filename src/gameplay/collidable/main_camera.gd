@@ -19,7 +19,7 @@ var player_radius: float = 0
 func _ready() -> void:
 	global_position = self.get_viewport_rect().get_center()
 	zoom = Vector2.ONE * camera_zoom
-	boundary_rect = camera_boundary.get_node("CollisionShape2D").shape.get_rect()
+	boundary_rect = camera_boundary.get_node("CameraBoundaryShape").shape.get_rect()
 	player_radius = (((
 		player
 		.get_node("CollisionTrigger") as Area2D)
@@ -29,10 +29,9 @@ func _ready() -> void:
 	SignalBus.connect_signal("safe_distance", safe_distance_handler)
 
 func _process(delta: float) -> void:
-	print("Zoom: ", zoom.x, " trauma: ", trauma)
 	if in_danger:
 		distance_to_danger = nearest_danger.distance_to(player.global_position) - player_radius
-		zoom = Vector2.ONE * (camera_zoom + (1 - distance_to_danger/radius) * 0.4)
+		zoom = Vector2.ONE * (camera_zoom + pow(1 - distance_to_danger/radius,2) * 0.2)
 		trauma = minf((1 - distance_to_danger/radius) * 1.4, 1)
 	if trauma <= 0.0:
 		offset = Vector2.ZERO
@@ -57,6 +56,7 @@ func danger_proximity_handler(data: Array):
 	radius = data[1] as float
 	in_danger = true
 
+@warning_ignore("unused_parameter")
 func safe_distance_handler(danger_pos: Vector2):
 	in_danger = false
 	zoom = Vector2.ONE * camera_zoom  

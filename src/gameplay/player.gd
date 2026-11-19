@@ -2,6 +2,10 @@ extends RigidBody2D
 
 const GRAVITY = 9.81
 var isBlack = true
+var nearest_danger: Vector2
+var in_danger: bool = false
+var material_instance: ShaderMaterial
+@export var shader: Shader
 
 @export var switchDuration: float = 0.5:
 	set(value):
@@ -13,6 +17,7 @@ var isBlack = true
 
 var currSwitchTime: float = 0
 var isSwitching: bool = false
+var danger_radius: float = 0
 var colorSwitchStep: float = maxColorIntensity/switchDuration
 
 @export var startVelocityX: float = 0:
@@ -26,12 +31,25 @@ var colorSwitchStep: float = maxColorIntensity/switchDuration
 func _ready() -> void:
 	$GravityArea2D.gravity = self.mass * GRAVITY
 	self.linear_velocity = Vector2(startVelocityX, startVelocityY)
+	SignalBus.connect_signal("danger_proximity", danger_proximity_handler)
+	SignalBus.connect_signal("safe_distance", safe_distance_handler)
+	material_instance = ShaderMaterial.new()
+	material_instance.shader = shader
+	$Sprite2D.material = material_instance
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass	
-		
-
+	if in_danger:
+		material_instance.set_shader_parameter(
+			"proximity_factor",
+			calculate_proximity_factor(
+				global_position.distance_to(nearest_danger)
+			)
+		)
+		material_instance.set_shader_parameter(
+			"stretch_direction", 
+			global_position.direction_to(nearest_danger)
+		)
 
 func _on_collision_trigger_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:
@@ -43,6 +61,20 @@ func _on_collision_trigger_body_entered(body: Node2D) -> void:
 		print("Player mass increased by ", body.mass)
 		body.queue_free()
 
+func danger_proximity_handler(data: Array):
+	nearest_danger = data[0] as Vector2
+	danger_radius = data[1] as float
+	in_danger = true
+
+@warning_ignore("unused_parameter")
+func safe_distance_handler(danger_pos: Vector2):
+	in_danger = false
+	
+func calculate_proximity_factor(
+	distance: float, 
+	maximum: float = 0.2
+):
+	return min(maximum * (1 - distance/danger_radius), maximum)
 
 func _input(event):
 	if event.is_action_pressed("shift") and not isSwitching:

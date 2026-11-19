@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://i8ucdg1y72yq"]
 
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="3_57pba"]
 [ext_resource type="Script" uid="uid://d21xd83eanwpk" path="res://src/gameplay/collidable/static_celestial.gd" id="1_kf5nv"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="1_y1760"]
 
@@ -12,14 +13,17 @@ radius = 276.83435
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppd8k"]
 radius = 43.011627
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfwyv"]
+shader = ExtResource("3_57pba")
+shader_parameter/proximity_factor = 0.0
+shader_parameter/stretch_direction = Vector2(0, 0)
+
 [node name="StaticCelestial" type="StaticBody2D" unique_id=1448866130]
 scale = Vector2(0.365, 0.365)
 collision_layer = 0
 script = ExtResource("1_kf5nv")
 
 [node name="Gravity" type="Area2D" parent="." unique_id=201071878]
-collision_layer = 3
-collision_mask = 3
 gravity_space_override = 1
 gravity_point = true
 gravity_point_unit_distance = 60.0
@@ -32,10 +36,17 @@ shape = SubResource("CircleShape2D_cfwyv")
 debug_color = Color(0.4509804, 0.5686275, 0.5058824, 0.09411765)
 
 [node name="CollisionTrigger" type="Area2D" parent="." unique_id=2045739461]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 11
+collision_mask = 11
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionTrigger" unique_id=668501574]
+position = Vector2(-5.4794517, 0)
 shape = SubResource("CircleShape2D_2ybf6")
 debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
 
@@ -44,6 +55,7 @@ shape = SubResource("CircleShape2D_ppd8k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992204393]
 modulate = Color(0.012617188, 0, 0, 1)
+material = SubResource("ShaderMaterial_cfwyv")
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("1_y1760")
 

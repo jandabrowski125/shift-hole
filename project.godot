@@ -25,9 +25,7 @@ SignalBus="*uid://nt8m53641r71"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/resizable=false
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor]
 
@@ -37,6 +35,7 @@ version_control/autoload_on_startup=true
 [global_group]
 
 players="This group contains the player (or more if multiplayer is ever developed)"
+planets=""
 
 [input]
 
@@ -57,3 +56,4 @@ shift={
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+scaling_3d/scale=0.25
