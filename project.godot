@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="ShiftHole"
-run/main_scene="uid://c4oriu76eth52"
+run/main_scene="uid://cwvq0cvi68x05"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+SceneLoader="*uid://did2nrwqwhtbb"
+SceneManager="*uid://b6sqhda61fkq3"
 SignalBus="*uid://nt8m53641r71"
 
 [display]

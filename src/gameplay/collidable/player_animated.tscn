@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bg1kfwwdv5yhv"]
 
-[ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://scripts/player.gd" id="1_ui2hb"]
-[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="2_kvxsh"]
-[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://scenes/scene_elements/spaghetticiation.gdshader" id="2_loycq"]
+[ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://src/gameplay/player.gd" id="1_ui2hb"]
+[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="2_kvxsh"]
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="2_loycq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57pba"]
 shader = ExtResource("2_loycq")

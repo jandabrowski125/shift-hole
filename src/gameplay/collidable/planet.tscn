@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1fb6l57sxg4d"]
 
-[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="1_cktii"]
+[ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="1_cktii"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 22.203604

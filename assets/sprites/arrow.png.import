@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be07og44ivoe7"
-path="res://.godot/imported/galaxy_background.jpg-8b46f84ff4cdd797d02a95bf97873fc2.ctex"
+uid="uid://dyf6mhmpxjgn"
+path="res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/galaxy_background.jpg"
-dest_files=["res://.godot/imported/galaxy_background.jpg-8b46f84ff4cdd797d02a95bf97873fc2.ctex"]
+source_file="res://assets/sprites/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-18e607c3398c94c410f88abf48695716.ctex"]
 
 [params]
 
