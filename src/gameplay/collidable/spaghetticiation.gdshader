@@ -21,8 +21,5 @@ void fragment() {
 	if (distance > 0.0) {
 		uv += (stretch_direction * -1.0) * distance * proximity_factor;
 	}
-	COLOR = texture(TEXTURE, uv);
-	COLOR.g = 0.0;
-	COLOR.b = 0.0;
-	COLOR.r = 0.0;
+	COLOR = texture(TEXTURE, uv) * COLOR;
 }
