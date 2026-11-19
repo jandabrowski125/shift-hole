@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c317eworr75ky"]
 
-[ext_resource type="Script" uid="uid://tmwciylxo21x" path="res://scripts/away_pointer.gd" id="1_jfx33"]
-[ext_resource type="Texture2D" uid="uid://dyf6mhmpxjgn" path="res://textures/arrow.png" id="1_p4kkg"]
+[ext_resource type="Script" uid="uid://tmwciylxo21x" path="res://src/ui/away_pointer.gd" id="1_jfx33"]
+[ext_resource type="Texture2D" uid="uid://dyf6mhmpxjgn" path="res://assets/sprites/arrow.png" id="1_p4kkg"]
 
 [node name="AwayPointer" type="Node2D" unique_id=1176296153]
 script = ExtResource("1_jfx33")
