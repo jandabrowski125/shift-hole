@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d21xd83eanwpk" path="res://scripts/static_celestial.gd" id="1_kf5nv"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="1_y1760"]
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://scenes/scene_elements/spaghetticiation.gdshader" id="3_57pba"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 1643.0195
@@ -11,6 +12,11 @@ radius = 276.83435
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppd8k"]
 radius = 43.011627
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfwyv"]
+shader = ExtResource("3_57pba")
+shader_parameter/proximity_factor = 0.0
+shader_parameter/stretch_direction = Vector2(0, 0)
 
 [node name="StaticCelestial" type="StaticBody2D" unique_id=1448866130]
 scale = Vector2(0.365, 0.365)
@@ -40,6 +46,7 @@ gravity_direction = Vector2(0, 0)
 gravity = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionTrigger" unique_id=668501574]
+position = Vector2(-5.4794517, 0)
 shape = SubResource("CircleShape2D_2ybf6")
 debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
 
@@ -48,6 +55,7 @@ shape = SubResource("CircleShape2D_ppd8k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992204393]
 modulate = Color(0.012617188, 0, 0, 1)
+material = SubResource("ShaderMaterial_cfwyv")
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("1_y1760")
 

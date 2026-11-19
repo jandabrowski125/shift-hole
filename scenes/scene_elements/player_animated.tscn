@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://scripts/player.gd" id="1_ui2hb"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://textures/planet.png" id="2_kvxsh"]
-[ext_resource type="Script" uid="uid://qvmaiyg30imj" path="res://scripts/spaghetti_particles.gd" id="3_kvxsh"]
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://scenes/scene_elements/spaghetticiation.gdshader" id="2_loycq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57pba"]
+shader = ExtResource("2_loycq")
+shader_parameter/proximity_factor = 0.0
+shader_parameter/stretch_direction = Vector2(0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 19.0
@@ -19,6 +24,7 @@ script = ExtResource("1_ui2hb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
 modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
+material = SubResource("ShaderMaterial_57pba")
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("2_kvxsh")
 
@@ -49,18 +55,5 @@ debug_color = Color(0.22352941, 0, 0.9882353, 0.09019608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=380145062]
 shape = SubResource("CircleShape2D_88rhy")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=745520326]
-emitting = false
-local_coords = true
-emission_shape = 1
-emission_sphere_radius = 19.22
-direction = Vector2(0, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-scale_amount_min = 10.0
-scale_amount_max = 10.0
-color = Color(0.012617188, 0.012617188, 0.012617188, 1)
-script = ExtResource("3_kvxsh")
 
 [connection signal="body_entered" from="CollisionTrigger" to="." method="_on_collision_trigger_body_entered"]
