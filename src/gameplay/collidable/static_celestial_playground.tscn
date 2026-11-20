@@ -5,7 +5,30 @@
 [ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="2_3k6wf"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="3_7xgj8"]
 [ext_resource type="Shader" uid="uid://2dqdmgdqcgwp" path="res://src/gameplay/collidable/black_hole_effects.gdshader" id="4_ko4fq"]
+[ext_resource type="Curve" uid="uid://bmkudu8s3l5vd" path="res://assets/curves/player_lensing_curve.tres" id="6_bt7u7"]
 [ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://src/gameplay/player.gd" id="6_ko4fq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
+radius = 1643.0195
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ybf6"]
+radius = 276.83435
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppd8k"]
+radius = 43.011627
+
+[sub_resource type="CurveTexture" id="CurveTexture_ppd8k"]
+curve = ExtResource("6_bt7u7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
+shader = ExtResource("4_ko4fq")
+shader_parameter/curve = SubResource("CurveTexture_ppd8k")
+shader_parameter/strength = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pstoq"]
+shader = ExtResource("2_3k6wf")
+shader_parameter/proximity_factor = 0.0
+shader_parameter/stretch_direction = Vector2(0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bt7u7"]
 radius = 1643.0195
@@ -39,12 +62,12 @@ _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 0.0047169924), 0.0, 0.0, 0, 0, Vector2(0.11802576, -0.4481132), 0.0, 0.0, 0, 0, Vector2(0.50214595, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ppd8k"]
+[sub_resource type="CurveTexture" id="CurveTexture_lgole"]
 curve = SubResource("Curve_88rhy")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eecv5"]
 shader = ExtResource("4_ko4fq")
-shader_parameter/curve = SubResource("CurveTexture_ppd8k")
+shader_parameter/curve = SubResource("CurveTexture_lgole")
 shader_parameter/strength = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bt7u7"]
@@ -65,15 +88,15 @@ radius = 19.026299
 z_index = -2
 texture = ExtResource("1_7xgj8")
 
-[node name="BlackHole1" type="StaticBody2D" parent="." unique_id=478608686]
-position = Vector2(622, 344)
-scale = Vector2(0.65000004, 0.65000004)
+[node name="StaticCelestial" type="StaticBody2D" parent="." unique_id=1448866130]
+position = Vector2(527, 399)
+scale = Vector2(0.755, 0.755)
 collision_layer = 0
-constant_linear_velocity = Vector2(0, -100)
 script = ExtResource("1_5vx0l")
 shader = ExtResource("2_3k6wf")
 
-[node name="Gravity" type="Area2D" parent="BlackHole1" unique_id=610660817]
+[node name="Gravity" type="Area2D" parent="StaticCelestial" unique_id=201071878]
+visible = false
 gravity_space_override = 1
 gravity_point = true
 gravity_point_unit_distance = 60.0
@@ -81,11 +104,12 @@ gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 gravity = 1000.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1/Gravity" unique_id=1302229973]
-shape = SubResource("CircleShape2D_bt7u7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCelestial/Gravity" unique_id=302503440]
+shape = SubResource("CircleShape2D_cfwyv")
 debug_color = Color(0.4509804, 0.5686275, 0.5058824, 0.09411765)
 
-[node name="CollisionTrigger" type="Area2D" parent="BlackHole1" unique_id=395100436]
+[node name="CollisionTrigger" type="Area2D" parent="StaticCelestial" unique_id=2045739461]
+visible = false
 collision_layer = 11
 collision_mask = 11
 gravity_space_override = 1
@@ -95,49 +119,158 @@ gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 gravity = 300.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1/CollisionTrigger" unique_id=1593336134]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCelestial/CollisionTrigger" unique_id=668501574]
+visible = false
+position = Vector2(-5.4794517, 0)
+shape = SubResource("CircleShape2D_2ybf6")
+debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticCelestial" unique_id=209044130]
+visible = false
+shape = SubResource("CircleShape2D_ppd8k")
+
+[node name="LensingEffect" type="Sprite2D" parent="StaticCelestial" unique_id=140408206]
+material = SubResource("ShaderMaterial_2ybf6")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_7xgj8")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticCelestial" unique_id=1992204393]
+modulate = Color(0.012617188, 0, 0, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_pstoq")
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("3_7xgj8")
+
+[node name="BlackHole1" type="StaticBody2D" parent="." unique_id=1600112459]
+position = Vector2(461, 829.00006)
+scale = Vector2(0.65000004, 0.65000004)
+collision_layer = 0
+constant_linear_velocity = Vector2(0, -100)
+script = ExtResource("1_5vx0l")
+shader = ExtResource("2_3k6wf")
+
+[node name="Gravity" type="Area2D" parent="BlackHole1" unique_id=1507918772]
+visible = false
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1/Gravity" unique_id=717111252]
+shape = SubResource("CircleShape2D_bt7u7")
+debug_color = Color(0.4509804, 0.5686275, 0.5058824, 0.09411765)
+
+[node name="CollisionTrigger" type="Area2D" parent="BlackHole1" unique_id=828390515]
+visible = false
+collision_layer = 11
+collision_mask = 11
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 300.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1/CollisionTrigger" unique_id=1620561397]
 position = Vector2(-5.4794517, 0)
 shape = SubResource("CircleShape2D_pstoq")
 debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1" unique_id=876709637]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole1" unique_id=2047320490]
+visible = false
 shape = SubResource("CircleShape2D_lgole")
 
-[node name="LensEffect" type="Sprite2D" parent="BlackHole1" unique_id=22761522]
+[node name="LensEffect" type="Sprite2D" parent="BlackHole1" unique_id=1712320172]
 material = SubResource("ShaderMaterial_cfwyv")
 scale = Vector2(0.17, 0.17)
 texture = ExtResource("3_7xgj8")
 
-[node name="Sprite2D" type="Sprite2D" parent="BlackHole1" unique_id=1119657472]
+[node name="Sprite2D" type="Sprite2D" parent="BlackHole1" unique_id=758127909]
 modulate = Color(0.012617188, 0, 0, 1)
 z_index = 1
 material = SubResource("ShaderMaterial_si3m8")
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("3_7xgj8")
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=279298118]
+[node name="BlackHole2" type="StaticBody2D" parent="." unique_id=1390441210]
+position = Vector2(944.99994, 757)
+scale = Vector2(0.65000004, 0.65000004)
+collision_layer = 0
+constant_linear_velocity = Vector2(0, -100)
+script = ExtResource("1_5vx0l")
+shader = ExtResource("2_3k6wf")
+
+[node name="Gravity" type="Area2D" parent="BlackHole2" unique_id=1166164130]
+visible = false
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole2/Gravity" unique_id=1401108227]
+shape = SubResource("CircleShape2D_bt7u7")
+debug_color = Color(0.4509804, 0.5686275, 0.5058824, 0.09411765)
+
+[node name="CollisionTrigger" type="Area2D" parent="BlackHole2" unique_id=138537629]
+visible = false
+collision_layer = 11
+collision_mask = 11
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 60.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 300.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole2/CollisionTrigger" unique_id=1976718386]
+position = Vector2(-5.4794517, 0)
+shape = SubResource("CircleShape2D_pstoq")
+debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlackHole2" unique_id=620644528]
+visible = false
+shape = SubResource("CircleShape2D_lgole")
+
+[node name="LensEffect" type="Sprite2D" parent="BlackHole2" unique_id=420026708]
+material = SubResource("ShaderMaterial_cfwyv")
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("3_7xgj8")
+
+[node name="Sprite2D" type="Sprite2D" parent="BlackHole2" unique_id=5454065]
+modulate = Color(0.012617188, 0, 0, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_si3m8")
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("3_7xgj8")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=2099345753]
 copy_mode = 2
 
-[node name="Player" type="RigidBody2D" parent="." unique_id=1179118559 groups=["players"]]
-position = Vector2(835, 452)
+[node name="Player" type="RigidBody2D" parent="." unique_id=743663769 groups=["players"]]
+position = Vector2(666, 344)
 mass = 100.0
 script = ExtResource("6_ko4fq")
 shader = ExtResource("2_3k6wf")
 startVelocityY = -100.0
 
-[node name="Sprite2D2" type="Sprite2D" parent="Player" unique_id=390417496]
-material = SubResource("ShaderMaterial_2ybf6")
+[node name="Sprite2D2" type="Sprite2D" parent="Player" unique_id=1683143146]
+material = SubResource("ShaderMaterial_eecv5")
 scale = Vector2(0.035, 0.035)
 texture = ExtResource("3_7xgj8")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1775206799]
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=398569561]
 modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
 z_index = 1
 material = SubResource("ShaderMaterial_bt7u7")
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_7xgj8")
 
-[node name="CollisionTrigger" type="Area2D" parent="Player" unique_id=386257530]
+[node name="CollisionTrigger" type="Area2D" parent="Player" unique_id=1250359816]
+visible = false
 collision_layer = 10
 collision_mask = 2
 input_pickable = false
@@ -145,11 +278,13 @@ gravity_point = true
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CollisionTrigger" unique_id=1384248955]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CollisionTrigger" unique_id=470340275]
+visible = false
 shape = SubResource("CircleShape2D_si3m8")
 debug_color = Color(0, 0.008664037, 0.0122821415, 0.41960785)
 
-[node name="GravityArea2D" type="Area2D" parent="Player" unique_id=1467174224]
+[node name="GravityArea2D" type="Area2D" parent="Player" unique_id=1841388809]
+visible = false
 collision_layer = 2
 collision_mask = 2
 gravity_space_override = 1
@@ -158,12 +293,17 @@ gravity_point_unit_distance = 60.0
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/GravityArea2D" unique_id=1879634342]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/GravityArea2D" unique_id=810857123]
 shape = SubResource("CircleShape2D_eecv5")
 debug_color = Color(0.22352941, 0, 0.9882353, 0.09019608)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=590277885]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1389304304]
 shape = SubResource("CircleShape2D_3b0yd")
 
+[connection signal="body_entered" from="StaticCelestial/CollisionTrigger" to="StaticCelestial" method="_on_collision_trigger_body_entered"]
+[connection signal="body_exited" from="StaticCelestial/CollisionTrigger" to="StaticCelestial" method="_on_collision_trigger_body_exited"]
 [connection signal="body_entered" from="BlackHole1/CollisionTrigger" to="BlackHole1" method="_on_collision_trigger_body_entered"]
+[connection signal="body_exited" from="BlackHole1/CollisionTrigger" to="BlackHole1" method="_on_collision_trigger_body_exited"]
+[connection signal="body_entered" from="BlackHole2/CollisionTrigger" to="BlackHole2" method="_on_collision_trigger_body_entered"]
+[connection signal="body_exited" from="BlackHole2/CollisionTrigger" to="BlackHole2" method="_on_collision_trigger_body_exited"]
 [connection signal="body_entered" from="Player/CollisionTrigger" to="Player" method="_on_collision_trigger_body_entered"]

@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d21xd83eanwpk" path="res://src/gameplay/collidable/static_celestial.gd" id="1_kf5nv"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="1_y1760"]
+[ext_resource type="Shader" uid="uid://2dqdmgdqcgwp" path="res://src/gameplay/collidable/black_hole_effects.gdshader" id="2_x17na"]
 [ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="3_57pba"]
+[ext_resource type="Curve" uid="uid://bmkudu8s3l5vd" path="res://assets/curves/player_lensing_curve.tres" id="3_l8ye7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cfwyv"]
 radius = 1643.0195
@@ -13,7 +15,15 @@ radius = 276.83435
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppd8k"]
 radius = 43.011627
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfwyv"]
+[sub_resource type="CurveTexture" id="CurveTexture_ppd8k"]
+curve = ExtResource("3_l8ye7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
+shader = ExtResource("2_x17na")
+shader_parameter/curve = SubResource("CurveTexture_ppd8k")
+shader_parameter/strength = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pstoq"]
 shader = ExtResource("3_57pba")
 shader_parameter/proximity_factor = 0.0
 shader_parameter/stretch_direction = Vector2(0, 0)
@@ -53,9 +63,15 @@ debug_color = Color(0.62078387, 0.51145566, 0.43481022, 0.41960785)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=209044130]
 shape = SubResource("CircleShape2D_ppd8k")
 
+[node name="LensingEffect" type="Sprite2D" parent="." unique_id=140408206]
+material = SubResource("ShaderMaterial_2ybf6")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_y1760")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1992204393]
 modulate = Color(0.012617188, 0, 0, 1)
-material = SubResource("ShaderMaterial_cfwyv")
+z_index = 1
+material = SubResource("ShaderMaterial_pstoq")
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("1_y1760")
 

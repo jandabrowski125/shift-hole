@@ -1,8 +1,18 @@
 [gd_scene format=3 uid="uid://bg1kfwwdv5yhv"]
 
 [ext_resource type="Script" uid="uid://y0e1gmccb5u5" path="res://src/gameplay/player.gd" id="1_ui2hb"]
+[ext_resource type="Shader" uid="uid://2dqdmgdqcgwp" path="res://src/gameplay/collidable/black_hole_effects.gdshader" id="2_6uvm6"]
 [ext_resource type="Texture2D" uid="uid://c8bdvhm4ocvvt" path="res://assets/sprites/planet.png" id="2_kvxsh"]
 [ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="2_loycq"]
+[ext_resource type="Curve" uid="uid://bmkudu8s3l5vd" path="res://assets/curves/player_lensing_curve.tres" id="3_2mwc2"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_w1w8j"]
+curve = ExtResource("3_2mwc2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8hd2"]
+shader = ExtResource("2_6uvm6")
+shader_parameter/curve = SubResource("CurveTexture_w1w8j")
+shader_parameter/strength = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57pba"]
 shader = ExtResource("2_loycq")
@@ -22,8 +32,14 @@ radius = 19.026299
 mass = 100.0
 script = ExtResource("1_ui2hb")
 
+[node name="LensingEffect" type="Sprite2D" parent="." unique_id=733233559]
+material = SubResource("ShaderMaterial_c8hd2")
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_kvxsh")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109438795]
 modulate = Color(0.00027977204, 0.00027977204, 0.00027977204, 1)
+z_index = 1
 material = SubResource("ShaderMaterial_57pba")
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("2_kvxsh")

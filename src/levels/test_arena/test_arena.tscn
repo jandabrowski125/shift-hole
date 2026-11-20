@@ -10,51 +10,61 @@
 [ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
 [ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixel_camera.gdshader" id="8_henmx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfwyv"]
-size = Vector2(428, 234)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdj5c"]
 render_priority = 0
 shader = ExtResource("7_w1w8j")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfwyv"]
+size = Vector2(428, 234)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
 shader_parameter/pixelation = 0.0070000003325
 shader_parameter/opacity = 0.0
 
-[node name="TestArena" type="Node2D" unique_id=877537602]
+[node name="BackgroundSprite" type="Sprite2D" unique_id=1230745236]
+modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
+z_index = -1
+material = SubResource("ShaderMaterial_kdj5c")
+scale = Vector2(1.005, 1.005)
+texture = ExtResource("7_pj4qw")
 
-[node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
-position = Vector2(406, 271)
-shader = ExtResource("2_c8hd2")
+[node name="Planet2" parent="." unique_id=649626695 instance=ExtResource("6_250wo")]
+position = Vector2(738.99994, 801.99994)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Planet" parent="." unique_id=524732889 instance=ExtResource("6_250wo")]
+position = Vector2(723.99994, 255.99998)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="StaticCelestial" parent="." unique_id=1448866130 instance=ExtResource("3_w1w8j")]
-position = Vector2(924, 414)
-scale = Vector2(0.575, 0.575)
+position = Vector2(923.9999, 413.99994)
+scale = Vector2(0.57499987, 0.57499987)
 shader = ExtResource("2_c8hd2")
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1776737357]
-position = Vector2(924, 414)
-scale = Vector2(0.575, 0.575)
-copy_mode = 2
 
 [node name="StaticCelestial2" parent="." unique_id=1479741982 instance=ExtResource("3_w1w8j")]
 position = Vector2(529, 638)
 scale = Vector2(0.575, 0.575)
 shader = ExtResource("2_c8hd2")
 
-[node name="BackBufferCopy2" type="BackBufferCopy" parent="." unique_id=1172696154]
-position = Vector2(529, 638)
-scale = Vector2(0.575, 0.575)
-copy_mode = 2
-
 [node name="StaticCelestial3" parent="." unique_id=1890405709 instance=ExtResource("3_w1w8j")]
-position = Vector2(1273, 800)
+position = Vector2(1273, 800.00006)
 scale = Vector2(0.44, 0.44)
 shader = ExtResource("2_c8hd2")
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1166681486]
+position = Vector2(405.99988, 271)
+scale = Vector2(0.9999996, 0.9999996)
+copy_mode = 2
+
+[node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
+position = Vector2(405.9999, 271)
+scale = Vector2(0.9999997, 0.9999997)
+shader = ExtResource("2_c8hd2")
+
 [node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("4_tvd4p")]
-position = Vector2(-92.99994, 41.000122)
+position = Vector2(-92.99993, 41.000122)
+scale = Vector2(0.99999994, 0.99999994)
 target = NodePath("../Player")
 
 [node name="CameraBoundary" type="Area2D" parent="." unique_id=1434549381]
@@ -71,20 +81,6 @@ camera_boundary = NodePath("..")
 [node name="CameraBoundaryShape" type="CollisionShape2D" parent="CameraBoundary" unique_id=118333850]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cfwyv")
-
-[node name="Planet" parent="." unique_id=524732889 instance=ExtResource("6_250wo")]
-position = Vector2(724, 256)
-
-[node name="Planet2" parent="." unique_id=649626695 instance=ExtResource("6_250wo")]
-position = Vector2(739, 802)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1230745236]
-modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
-z_index = -10
-material = SubResource("ShaderMaterial_kdj5c")
-position = Vector2(959.00006, 540)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_pj4qw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957077379]
 
