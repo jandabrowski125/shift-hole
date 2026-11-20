@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 			"stretch_direction", 
 			global_position.direction_to(nearest_danger)
 		)
+		print("Proximity factor: ", calculate_proximity_factor(global_position.distance_to(nearest_danger)))
 
 func _on_collision_trigger_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:

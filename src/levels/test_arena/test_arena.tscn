@@ -7,10 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/collidable/main_camera.tscn" id="5_eqpnh"]
 [ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://src/gameplay/collidable/planet.tscn" id="6_250wo"]
 [ext_resource type="Texture2D" uid="uid://be07og44ivoe7" path="res://assets/sprites/galaxy_background.jpg" id="7_pj4qw"]
+[ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
 [ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixel_camera.gdshader" id="8_henmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfwyv"]
 size = Vector2(428, 234)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdj5c"]
+render_priority = 0
+shader = ExtResource("7_w1w8j")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
@@ -28,10 +33,20 @@ position = Vector2(924, 414)
 scale = Vector2(0.575, 0.575)
 shader = ExtResource("2_c8hd2")
 
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1776737357]
+position = Vector2(924, 414)
+scale = Vector2(0.575, 0.575)
+copy_mode = 2
+
 [node name="StaticCelestial2" parent="." unique_id=1479741982 instance=ExtResource("3_w1w8j")]
 position = Vector2(529, 638)
 scale = Vector2(0.575, 0.575)
 shader = ExtResource("2_c8hd2")
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="." unique_id=1172696154]
+position = Vector2(529, 638)
+scale = Vector2(0.575, 0.575)
+copy_mode = 2
 
 [node name="StaticCelestial3" parent="." unique_id=1890405709 instance=ExtResource("3_w1w8j")]
 position = Vector2(1273, 800)
@@ -66,6 +81,7 @@ position = Vector2(739, 802)
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1230745236]
 modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
 z_index = -10
+material = SubResource("ShaderMaterial_kdj5c")
 position = Vector2(959.00006, 540)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_pj4qw")
