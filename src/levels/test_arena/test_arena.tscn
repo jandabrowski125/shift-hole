@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://c4oriu76eth52"]
 
-[ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/collidable/player_animated.tscn" id="1_m3eqb"]
-[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="2_c8hd2"]
+[ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/player.tscn" id="1_m3eqb"]
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/event_horizon_stretching.gdshader" id="2_c8hd2"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://src/gameplay/collidable/static_celestial.tscn" id="3_w1w8j"]
 [ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://src/ui/away_pointer.tscn" id="4_tvd4p"]
-[ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/collidable/main_camera.tscn" id="5_eqpnh"]
+[ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/main_camera.tscn" id="5_eqpnh"]
 [ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://src/gameplay/collidable/planet.tscn" id="6_250wo"]
 [ext_resource type="Texture2D" uid="uid://be07og44ivoe7" path="res://assets/sprites/galaxy_background.jpg" id="7_pj4qw"]
 [ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
-[ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixel_camera.gdshader" id="8_henmx"]
+[ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixelate_camera.gdshader" id="8_henmx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdj5c"]
 render_priority = 0
@@ -19,8 +19,8 @@ size = Vector2(428, 234)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
-shader_parameter/pixelation = 0.0070000003325
-shader_parameter/opacity = 0.0
+shader_parameter/pixelation = 0.3410000161975
+shader_parameter/opacity = 1.0
 
 [node name="BackgroundSprite" type="Sprite2D" unique_id=1230745236]
 modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
@@ -58,9 +58,10 @@ scale = Vector2(0.9999996, 0.9999996)
 copy_mode = 2
 
 [node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
-position = Vector2(405.9999, 271)
-scale = Vector2(0.9999997, 0.9999997)
+position = Vector2(405.99985, 271)
+scale = Vector2(0.99999946, 0.99999946)
 shader = ExtResource("2_c8hd2")
+startVelocityX = 100.0
 
 [node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("4_tvd4p")]
 position = Vector2(-92.99993, 41.000122)
@@ -85,6 +86,7 @@ shape = SubResource("RectangleShape2D_cfwyv")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957077379]
 
 [node name="PixelateEffect" type="ColorRect" parent="CanvasLayer" unique_id=1549638312]
+visible = false
 material = SubResource("ShaderMaterial_2ybf6")
 anchors_preset = 15
 anchor_right = 1.0

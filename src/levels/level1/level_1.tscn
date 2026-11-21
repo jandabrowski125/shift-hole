@@ -1,22 +1,19 @@
 [gd_scene format=3 uid="uid://m7igh4attb1"]
 
-[ext_resource type="PackedScene" uid="uid://dxho1h5kuf7kf" path="res://src/gameplay/player.tscn" id="1_dkiwr"]
+[ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/player.tscn" id="1_dkiwr"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://src/gameplay/collidable/static_celestial.tscn" id="2_4bfy7"]
 [ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://src/ui/away_pointer.tscn" id="3_n18jc"]
 
 [node name="TestArena" type="Node2D" unique_id=877537602]
 
 [node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_dkiwr")]
-position = Vector2(174, 174)
-startVelocityX = 300.0
 
 [node name="StaticCelestial" parent="." unique_id=1448866130 instance=ExtResource("2_4bfy7")]
 position = Vector2(560.00006, 581)
 scale = Vector2(0.575, 0.575)
 
-[node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("3_n18jc")]
+[node name="AwayPointer" parent="." unique_id=1176296153 instance=ExtResource("3_n18jc")]
 position = Vector2(-92.99994, 41.000122)
-target = NodePath("../Player")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1143849959]
 position = Vector2(960, 540)
