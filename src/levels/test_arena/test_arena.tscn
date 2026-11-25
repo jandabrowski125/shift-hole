@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/player.tscn" id="1_m3eqb"]
 [ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/event_horizon_stretching.gdshader" id="2_c8hd2"]
+[ext_resource type="Texture2D" uid="uid://cp1voeq64sra7" path="res://assets/sprites/background_cloudy.png" id="2_w1w8j"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://src/gameplay/collidable/static_celestial.tscn" id="3_w1w8j"]
 [ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://src/ui/away_pointer.tscn" id="4_tvd4p"]
 [ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/main_camera.tscn" id="5_eqpnh"]
 [ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://src/gameplay/collidable/planet.tscn" id="6_250wo"]
-[ext_resource type="Texture2D" uid="uid://be07og44ivoe7" path="res://assets/sprites/galaxy_background.jpg" id="7_pj4qw"]
 [ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
 [ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixelate_camera.gdshader" id="8_henmx"]
 
@@ -19,15 +19,33 @@ size = Vector2(428, 234)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
-shader_parameter/pixelation = 0.3410000161975
-shader_parameter/opacity = 1.0
+shader_parameter/pixelation = 0.7010000332975
+shader_parameter/opacity = 0.298000014155
 
 [node name="BackgroundSprite" type="Sprite2D" unique_id=1230745236]
-modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
 z_index = -1
 material = SubResource("ShaderMaterial_kdj5c")
-scale = Vector2(1.005, 1.005)
-texture = ExtResource("7_pj4qw")
+
+[node name="CameraBoundary" type="Area2D" parent="." unique_id=1434549381]
+position = Vector2(960, 540)
+collision_layer = 0
+collision_mask = 0
+
+[node name="MainCamera" parent="CameraBoundary" unique_id=163096440 node_paths=PackedStringArray("player", "camera_boundary") instance=ExtResource("5_eqpnh")]
+zoom = Vector2(1.3, 1.3)
+smoothing = 0.387
+player = NodePath("../../Player")
+camera_boundary = NodePath("..")
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="CameraBoundary/MainCamera" unique_id=1125420232]
+modulate = Color(0.8901961, 0.3529412, 0.37254903, 1)
+z_index = -1
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("2_w1w8j")
+
+[node name="CameraBoundaryShape" type="CollisionShape2D" parent="CameraBoundary" unique_id=118333850]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_cfwyv")
 
 [node name="Planet2" parent="." unique_id=649626695 instance=ExtResource("6_250wo")]
 position = Vector2(738.99994, 801.99994)
@@ -67,21 +85,6 @@ startVelocityX = 100.0
 position = Vector2(-92.99993, 41.000122)
 scale = Vector2(0.99999994, 0.99999994)
 target = NodePath("../Player")
-
-[node name="CameraBoundary" type="Area2D" parent="." unique_id=1434549381]
-position = Vector2(960, 540)
-collision_layer = 0
-collision_mask = 0
-
-[node name="MainCamera" parent="CameraBoundary" unique_id=163096440 node_paths=PackedStringArray("player", "camera_boundary") instance=ExtResource("5_eqpnh")]
-zoom = Vector2(1.3, 1.3)
-smoothing = 0.387
-player = NodePath("../../Player")
-camera_boundary = NodePath("..")
-
-[node name="CameraBoundaryShape" type="CollisionShape2D" parent="CameraBoundary" unique_id=118333850]
-position = Vector2(-1, -2)
-shape = SubResource("RectangleShape2D_cfwyv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957077379]
 
