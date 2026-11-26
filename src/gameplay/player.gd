@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 			"stretch_direction", 
 			global_position.direction_to(nearest_danger)
 		)
+		print("Proximity factor: ", calculate_proximity_factor(global_position.distance_to(nearest_danger)))
 
 func _on_collision_trigger_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:
@@ -84,20 +85,25 @@ func _input(event):
 		$GravityArea2D.gravity *= -1
 
 		var base = $Sprite2D.scale
+		var lensing_base = $LensingEffect.scale
 		var c = 0.0 if isBlack else maxColorIntensity
 
 		var t = create_tween()
 		if isBlack:
 			# white -> black
 			t.tween_property($Sprite2D, "scale", Vector2.ZERO, switchDuration / 3)
+			t.parallel().tween_property($LensingEffect, "scale", Vector2.ZERO, switchDuration / 3)
 			t.tween_property($Sprite2D, "modulate", Color(c, c, c), switchDuration / 3)
-			t.tween_property($Sprite2D, "scale", base, switchDuration / 3) \
+			t.tween_property($Sprite2D, "scale", base, switchDuration / 3)
+			t.tween_property($LensingEffect, "scale", lensing_base, switchDuration / 3) \
 				.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		else:
 			# black -> white
 			t.tween_property($Sprite2D, "scale", base * Vector2(1.3, 0.7), 0.08)
+			t.parallel().tween_property($LensingEffect, "scale", lensing_base * Vector2(1.3, 0.7), 0.08)
 			t.parallel().tween_property($Sprite2D, "modulate", Color(c, c, c), 0.08)
-			t.tween_property($Sprite2D, "scale", base, 0.4) \
+			t.tween_property($Sprite2D, "scale", base, 0.4)
+			t.parallel().tween_property($LensingEffect, "scale", lensing_base, 0.4) \
 				.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 		t.finished.connect(func(): isSwitching = false)

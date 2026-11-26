@@ -1,46 +1,30 @@
 [gd_scene format=3 uid="uid://c4oriu76eth52"]
 
-[ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/collidable/player_animated.tscn" id="1_m3eqb"]
-[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/spaghetticiation.gdshader" id="2_c8hd2"]
+[ext_resource type="PackedScene" uid="uid://bg1kfwwdv5yhv" path="res://src/gameplay/player.tscn" id="1_m3eqb"]
+[ext_resource type="Shader" uid="uid://dfbuqsq8c0p3l" path="res://src/gameplay/collidable/event_horizon_stretching.gdshader" id="2_c8hd2"]
+[ext_resource type="Texture2D" uid="uid://cp1voeq64sra7" path="res://assets/sprites/background_cloudy.png" id="2_w1w8j"]
 [ext_resource type="PackedScene" uid="uid://i8ucdg1y72yq" path="res://src/gameplay/collidable/static_celestial.tscn" id="3_w1w8j"]
 [ext_resource type="PackedScene" uid="uid://c317eworr75ky" path="res://src/ui/away_pointer.tscn" id="4_tvd4p"]
-[ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/collidable/main_camera.tscn" id="5_eqpnh"]
+[ext_resource type="PackedScene" uid="uid://dtkykabsvy1gl" path="res://src/gameplay/main_camera.tscn" id="5_eqpnh"]
 [ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://src/gameplay/collidable/planet.tscn" id="6_250wo"]
-[ext_resource type="Texture2D" uid="uid://be07og44ivoe7" path="res://assets/sprites/galaxy_background.jpg" id="7_pj4qw"]
-[ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixel_camera.gdshader" id="8_henmx"]
+[ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
+[ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixelate_camera.gdshader" id="8_henmx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdj5c"]
+render_priority = 0
+shader = ExtResource("7_w1w8j")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfwyv"]
 size = Vector2(428, 234)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
-shader_parameter/pixelation = 0.0070000003325
-shader_parameter/opacity = 0.0
+shader_parameter/pixelation = 0.7010000332975
+shader_parameter/opacity = 0.298000014155
 
-[node name="TestArena" type="Node2D" unique_id=877537602]
-
-[node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
-position = Vector2(406, 271)
-shader = ExtResource("2_c8hd2")
-
-[node name="StaticCelestial" parent="." unique_id=1448866130 instance=ExtResource("3_w1w8j")]
-position = Vector2(924, 414)
-scale = Vector2(0.575, 0.575)
-shader = ExtResource("2_c8hd2")
-
-[node name="StaticCelestial2" parent="." unique_id=1479741982 instance=ExtResource("3_w1w8j")]
-position = Vector2(529, 638)
-scale = Vector2(0.575, 0.575)
-shader = ExtResource("2_c8hd2")
-
-[node name="StaticCelestial3" parent="." unique_id=1890405709 instance=ExtResource("3_w1w8j")]
-position = Vector2(1273, 800)
-scale = Vector2(0.44, 0.44)
-shader = ExtResource("2_c8hd2")
-
-[node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("4_tvd4p")]
-position = Vector2(-92.99994, 41.000122)
-target = NodePath("../Player")
+[node name="BackgroundSprite" type="Sprite2D" unique_id=1230745236]
+z_index = -1
+material = SubResource("ShaderMaterial_kdj5c")
 
 [node name="CameraBoundary" type="Area2D" parent="." unique_id=1434549381]
 position = Vector2(960, 540)
@@ -53,26 +37,59 @@ smoothing = 0.387
 player = NodePath("../../Player")
 camera_boundary = NodePath("..")
 
+[node name="BackgroundSprite2D" type="Sprite2D" parent="CameraBoundary/MainCamera" unique_id=1125420232]
+modulate = Color(0.8901961, 0.3529412, 0.37254903, 1)
+z_index = -1
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("2_w1w8j")
+
 [node name="CameraBoundaryShape" type="CollisionShape2D" parent="CameraBoundary" unique_id=118333850]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_cfwyv")
 
-[node name="Planet" parent="." unique_id=524732889 instance=ExtResource("6_250wo")]
-position = Vector2(724, 256)
-
 [node name="Planet2" parent="." unique_id=649626695 instance=ExtResource("6_250wo")]
-position = Vector2(739, 802)
+position = Vector2(738.99994, 801.99994)
+scale = Vector2(0.99999994, 0.99999994)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1230745236]
-modulate = Color(1.3928474, 1.3928474, 0.3541538, 1)
-z_index = -10
-position = Vector2(959.00006, 540)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("7_pj4qw")
+[node name="Planet" parent="." unique_id=524732889 instance=ExtResource("6_250wo")]
+position = Vector2(723.99994, 255.99998)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="StaticCelestial" parent="." unique_id=1448866130 instance=ExtResource("3_w1w8j")]
+position = Vector2(923.9999, 413.99994)
+scale = Vector2(0.57499987, 0.57499987)
+shader = ExtResource("2_c8hd2")
+
+[node name="StaticCelestial2" parent="." unique_id=1479741982 instance=ExtResource("3_w1w8j")]
+position = Vector2(529, 638)
+scale = Vector2(0.575, 0.575)
+shader = ExtResource("2_c8hd2")
+
+[node name="StaticCelestial3" parent="." unique_id=1890405709 instance=ExtResource("3_w1w8j")]
+position = Vector2(1273, 800.00006)
+scale = Vector2(0.44, 0.44)
+shader = ExtResource("2_c8hd2")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1166681486]
+position = Vector2(405.99988, 271)
+scale = Vector2(0.9999996, 0.9999996)
+copy_mode = 2
+
+[node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
+position = Vector2(405.99985, 271)
+scale = Vector2(0.99999946, 0.99999946)
+shader = ExtResource("2_c8hd2")
+startVelocityX = 100.0
+
+[node name="AwayPointer" parent="." unique_id=1176296153 node_paths=PackedStringArray("target") instance=ExtResource("4_tvd4p")]
+position = Vector2(-92.99993, 41.000122)
+scale = Vector2(0.99999994, 0.99999994)
+target = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957077379]
 
 [node name="PixelateEffect" type="ColorRect" parent="CanvasLayer" unique_id=1549638312]
+visible = false
 material = SubResource("ShaderMaterial_2ybf6")
 anchors_preset = 15
 anchor_right = 1.0
