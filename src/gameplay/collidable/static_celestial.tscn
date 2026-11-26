@@ -75,5 +75,7 @@ material = SubResource("ShaderMaterial_pstoq")
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("1_y1760")
 
+[connection signal="body_entered" from="Gravity" to="." method="_on_gravity_body_entered"]
+[connection signal="body_exited" from="Gravity" to="." method="_on_gravity_body_exited"]
 [connection signal="body_entered" from="CollisionTrigger" to="." method="_on_collision_trigger_body_entered"]
 [connection signal="body_exited" from="CollisionTrigger" to="." method="_on_collision_trigger_body_exited"]

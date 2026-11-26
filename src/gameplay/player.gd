@@ -3,6 +3,7 @@ extends RigidBody2D
 const GRAVITY = 9.81
 var isBlack = true
 var nearest_danger: Vector2
+@export var gravity_layers: int = 0
 var in_danger: bool = false
 var material_instance: ShaderMaterial
 @export var shader: Shader
@@ -33,11 +34,13 @@ func _ready() -> void:
 	self.linear_velocity = Vector2(startVelocityX, startVelocityY)
 	SignalBus.connect_signal("danger_proximity", danger_proximity_handler)
 	SignalBus.connect_signal("safe_distance", safe_distance_handler)
+	SignalBus.connect_signal("entered_gravity_layer", entered_gravity_layer_handler)
+	SignalBus.connect_signal("left_gravity_layer", left_gravity_layer_handler)
 	material_instance = ShaderMaterial.new()
 	material_instance.shader = shader
 	$Sprite2D.material = material_instance
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	if in_danger:
 		material_instance.set_shader_parameter(
@@ -66,6 +69,17 @@ func danger_proximity_handler(data: Array):
 	nearest_danger = data[0] as Vector2
 	danger_radius = data[1] as float
 	in_danger = true
+
+@warning_ignore("unused_parameter")
+func entered_gravity_layer_handler(data: Variant = null):
+	gravity_layers += 1
+
+@warning_ignore("unused_parameter")
+func left_gravity_layer_handler(data: Variant = null):
+	gravity_layers -= 1
+	if not gravity_layers:
+		SignalBus.emit("player_died", true)
+		self.sleeping = true
 
 @warning_ignore("unused_parameter")
 func safe_distance_handler(danger_pos: Vector2):

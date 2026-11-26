@@ -44,3 +44,13 @@ func calculate_proximity_factor(
 	maximum: float = 0.2
 ):
 	return min(maximum * (1 - distance/radius), maximum)
+
+
+func _on_gravity_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		SignalBus.emit("entered_gravity_layer")
+
+func _on_gravity_body_exited(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		SignalBus.emit("left_gravity_layer")
+	pass # Replace with function body.

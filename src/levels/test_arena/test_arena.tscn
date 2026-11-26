@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://d1fb6l57sxg4d" path="res://src/gameplay/collidable/planet.tscn" id="6_250wo"]
 [ext_resource type="Shader" uid="uid://dbwxnyash2ukl" path="res://src/levels/test_arena/background_lensing.gdshader" id="7_w1w8j"]
 [ext_resource type="Shader" uid="uid://d4dc2bmayaatu" path="res://src/gameplay/collidable/pixelate_camera.gdshader" id="8_henmx"]
+[ext_resource type="Script" uid="uid://6vogkanjmtko" path="res://src/scripts/death_overlay.gd" id="9_w1w8j"]
+[ext_resource type="Shader" uid="uid://c6rolxfrtnjf7" path="res://src/scripts/death_text.gdshader" id="10_eqpnh"]
+[ext_resource type="Texture2D" uid="uid://ckj3qvtmq8xce" path="res://assets/sprites/you_got_sucked2x.png" id="10_tvd4p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdj5c"]
 render_priority = 0
@@ -16,6 +19,10 @@ shader = ExtResource("7_w1w8j")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfwyv"]
 size = Vector2(428, 234)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eqpnh"]
+shader = ExtResource("10_eqpnh")
+shader_parameter/percentage = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ybf6"]
 shader = ExtResource("8_henmx")
@@ -78,6 +85,7 @@ copy_mode = 2
 [node name="Player" parent="." unique_id=851073145 instance=ExtResource("1_m3eqb")]
 position = Vector2(405.99985, 271)
 scale = Vector2(0.99999946, 0.99999946)
+gravity_layers = 2
 shader = ExtResource("2_c8hd2")
 startVelocityX = 100.0
 
@@ -87,6 +95,32 @@ scale = Vector2(0.99999994, 0.99999994)
 target = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1957077379]
+
+[node name="DeathOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1109410885]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012617188, 0.012617188, 0.012617188, 0)
+script = ExtResource("9_w1w8j")
+
+[node name="YouGotSucked" type="TextureRect" parent="CanvasLayer/DeathOverlay" unique_id=738293006]
+visible = false
+material = SubResource("ShaderMaterial_eqpnh")
+layout_mode = 0
+offset_right = 1625.0
+offset_bottom = 694.0
+texture = ExtResource("10_tvd4p")
+
+[node name="YouWentTooFar" type="TextureRect" parent="CanvasLayer/DeathOverlay" unique_id=1537994730]
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_eqpnh")
+layout_mode = 0
+offset_right = 1625.0
+offset_bottom = 694.0
+texture = ExtResource("10_tvd4p")
 
 [node name="PixelateEffect" type="ColorRect" parent="CanvasLayer" unique_id=1549638312]
 visible = false
